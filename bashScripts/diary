@@ -1,0 +1,13 @@
+#!/bin/bash
+
+diary() {
+
+cd ~/entries 
+
+vim "`\date`".txt
+
+exit 
+
+}
+
+diary
