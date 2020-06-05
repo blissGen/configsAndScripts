@@ -2,10 +2,10 @@
 
 lilypond () {
 
-	/Applications/LilyPond.app/Contents/Resources/bin/lilypond $@
+	/Applications/LilyPond.app/Contents/Resources/bin/lilypond $1.ly
 
 	exit
 
 }
 
-lilypond $@
+lilypond $1
