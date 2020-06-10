@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/preservim/nerdtree.git' 
 Plug 'https://github.com/vim-syntastic/syntastic.git' 
 Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/gisraptor/vim-lilypond-integrator.git'
 
 call plug#end() 
 
