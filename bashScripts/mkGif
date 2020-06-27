@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mkGif () {
+
+	cd originalMedia
+
+	mkdir -p frames/
+
+	for i in *.mp4; do ffmpeg -i *.mp4 -ss $t -t 00:04 clip.mp4; done
+
+	ffmpeg -i clip.mp4 -r 23 frames%2d.jpg && mv *.jpg frames
+
+	cd frames
+
+}
