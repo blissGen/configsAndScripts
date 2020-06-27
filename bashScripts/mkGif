@@ -1,15 +1,38 @@
 #!/bin/bash
 
 mkGif () {
+	
+	for t in "$@";
+	do 
+		gifProcess $t
+	done
 
-	cd originalMedia
+	echo $'\nprocess complete\n\n'
+
+	exit
+
+}
+
+gifProcess () {
+
+	cd media
 
 	mkdir -p frames/
 
-	for i in *.mp4; do ffmpeg -i *.mp4 -ss $t -t 00:04 clip.mp4; done
+	for i in *.mov; do ffmpeg -i *.mov -ss $t -t 00:04 clip.mov; done
 
-	ffmpeg -i clip.mp4 -r 23 frames%2d.jpg && mv *.jpg frames
+	ffmpeg -i clip.mov -r 10 frames%2d.jpg && mv *.jpg frames
 
 	cd frames
 
+	convert *.jpg -delay 10 media-${t}.gif
+
+	mv *.gif ~/myWindow/mkGif/output
+
+	cd ~/myWindow/mkGif 
+
+	echo $'\ngif complete\n'
+
 }
+
+mkGif $@
