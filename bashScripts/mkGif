@@ -17,19 +17,27 @@ gifProcess () {
 
 	cd media
 
-	mkdir -p frames/
+	mkdir -p frames/lFrames
 
-	for i in *.mov; do ffmpeg -i *.mov -ss $t -t 00:04 clip.mov; done
+	for i in *.mov; do ffmpeg -i *.mov -ss $t -t 00:03 clip.mov; done
 
 	ffmpeg -i clip.mov -r 10 frames%2d.jpg && mv *.jpg frames
 
 	cd frames
 
-	convert *.jpg -delay 10 media-${t}.gif
+	cp *.jpg lFrames
+
+	cd lFrames
+
+	mogrify *.jpg +dither -colors 16 -resize 30% *.jpg 
+
+	convert *.jpg -delay 40 media-${t}.gif
 
 	mv *.gif ~/myWindow/mkGif/output
 
 	cd ~/myWindow/mkGif 
+
+	rm -r -f ~/myWindow/mkGif/media/clip.mov ~/myWindow/mkGif/media/frames/
 
 	echo $'\ngif complete\n'
 
