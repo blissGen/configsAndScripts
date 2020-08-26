@@ -1,12 +1,27 @@
 #!/bin/bash
 
-for i in $(seq -f "%03g" 1 50); 
+canvasVideo () {
 
-	do convert -size 300x300 plasma:red-blue canvas$i.jpg; 	
-	
-done
+	mkdir frames/ output/
 
-mogrify *.jpg -blur 0x2 -emboss 2 *.jpg;
+	cd frames/
 
-ffmpeg -framerate 4 -i canvas%03d.jpg -pix_fmt yuv420p canvas.mov
-	 
+  for i in $(seq -f "%03g" 1 50); 
+  
+  	do convert -size 300x300 plasma:$1-$2 canvas$i.jpg; 	
+  	
+  done;
+  
+  #mogrify *.jpg -blur 0x2 -emboss 2 *.jpg;
+  
+  ffmpeg -framerate 4 -i canvas%03d.jpg -pix_fmt yuv420p canvas_$1_$2.mov;
+
+	rm *.jpg
+
+	mv canvas_$1_$2.mov ../output
+
+	exit
+
+}
+
+canvasVideo $1 $2

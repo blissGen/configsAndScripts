@@ -4,7 +4,7 @@ mkGif () {
 	
 	for t in "$@";
 	do 
-		gifProcess $t
+		gifProcess $t;
 	done
 
 	echo $'\nprocess complete\n\n'
@@ -19,7 +19,10 @@ gifProcess () {
 
 	mkdir -p frames/lFrames
 
-	for i in *.mov; do ffmpeg -i *.mov -ss $t -t 00:03 clip.mov; done
+	for i in *.mov; 
+	do 
+		ffmpeg -i *.mov -ss $t -t 00:03 clip.mov; 
+	done
 
 	ffmpeg -i clip.mov -r 10 frames%2d.jpg && mv *.jpg frames
 
