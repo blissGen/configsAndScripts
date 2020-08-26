@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for i in $(seq -f "%03g" 1 50); 
+
+	do convert -size 300x300 plasma:red-blue canvas$i.jpg; 	
+	
+done
+
+mogrify *.jpg -blur 0x2 -emboss 2 *.jpg;
+
+ffmpeg -framerate 4 -i canvas%03d.jpg -pix_fmt yuv420p canvas.mov
+	 
